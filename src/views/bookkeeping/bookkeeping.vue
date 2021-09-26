@@ -1,17 +1,17 @@
 <template>
-<dvi>
+<div>
   <nav-bar class="nav-bar">
     <template #center><div>记账</div></template>
   </nav-bar>
 
-  <div>
-    <select-item v-for="item in itemSrc">
+  <div class="bar-item" >
+    <select-item v-for="item in itemSrc" :item="item.name">
       <template #item-icon><img :src="item.src" alt=""></template>
       <template #item-text><div>{{item.name}}</div></template>
     </select-item>
   </div>
 
-</dvi>
+</div>
 </template>
 
 <script>
@@ -25,25 +25,57 @@ export default {
       itemSrc: []
     };
   },
-  created: {
-    // getItem();
+  created() {
+    this.getItem();
   },
   methods: {
     getItem() {
       this.itemSrc = [
         {
-          src: '~assets/img/tabBar/bookkeeping.png',
+          src: require('assets/img/tabBar/bookkeeping.png'),
           name: '图片'
         },
         {
-          src: '~assets/img/tabBar/home.png',
+          src: require('assets/img/tabBar/home.png'),
           name: 'a'
         },
         {
-          src: '~assets/img/tabBar/profile.png',
+          src: require('assets/img/tabBar/profile.png'),
+          name: 'b'
+        },
+        {
+          src: require('assets/img/tabBar/profile.png'),
+          name: 'b'
+        },
+        {
+          src: require('assets/img/tabBar/profile.png'),
+          name: 'b'
+        },
+        {
+          src: require('assets/img/tabBar/profile.png'),
+          name: 'b'
+        },
+        {
+          src: require('assets/img/tabBar/profile.png'),
+          name: 'b'
+        },
+        {
+          src: require('assets/img/tabBar/profile.png'),
+          name: 'b'
+        },
+        {
+          src: require('assets/img/tabBar/profile.png'),
+          name: 'b'
+        },
+        {
+          src: require('assets/img/tabBar/profile.png'),
+          name: 'b'
+        },
+        {
+          src: require('assets/img/tabBar/profile.png'),
           name: 'b'
         }
-      ]
+      ];
     }
   },
   components: {
@@ -56,5 +88,12 @@ export default {
 <style scoped>
 .nav-bar {
   background-color: rgba(100, 100, 100, .3);
+}
+
+.bar-item {
+  margin: 20px 20px 0;
+
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>
