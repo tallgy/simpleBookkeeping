@@ -33,3 +33,6 @@ echars  使用
 
     在main.js中进行定义，然后在要使用的地方的mounted hook里面进行初始化操作。
     挂载到vue的根组件里面
+    legend: { show: true }, 显示按钮可以选择是否显示
+    y坐标设置和x坐标的设置
+

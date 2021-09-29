@@ -19,7 +19,8 @@
   </div>
 
   <div class="button-box">
-    <div class="button" @click="clickSubmit">提交</div>
+<!--    <div class="myButton" @click="clickSubmit">提交</div>-->
+    <my-button @click="clickSubmit">提交</my-button>
   </div>
 
 </div>
@@ -27,6 +28,7 @@
 
 <script>
 import navBar from 'components/common/navBar/navBar'
+import myButton from 'components/common/myButton/myButton'
 
 export default {
   name: "addBill",
@@ -49,7 +51,8 @@ export default {
     this.initMethod();
   },
   components: {
-    navBar
+    navBar,
+    myButton
   },
   methods: {
     initMethod() {
@@ -130,22 +133,5 @@ export default {
 .button-box {
   display: flex;
   justify-content: center;
-}
-.button {
-  text-align: center;
-  line-height: 30px;
-  width: 60px;
-  color: white;
-
-  border-radius: 4px;
-
-  background-color: #e13131;
-
-  transition: all .5s;
-}
-.button:active {
-  background-color: #c96868;
-  color: white;
-  box-shadow: 0px 0px 5px #de7f7f;
 }
 </style>
