@@ -10,7 +10,7 @@ import mainTabBar from 'components/content/mainTabBar/mainTabBar'
 
 export default {
   components: {
-    mainTabBar
+    mainTabBar,
   }
 }
 
@@ -18,4 +18,9 @@ export default {
 
 <style lang="scss">
 @import "assets/css/base.css";
+
+router-view {
+  height: 30vh;
+}
+
 </style>

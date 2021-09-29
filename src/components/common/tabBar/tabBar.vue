@@ -21,7 +21,7 @@ export default {
 
   height: 60px;
   align-items: center;
-  /*background-color: rgba(100, 100, 100, .3);*/
+  background-color: #fff;
 
   box-shadow: 0px -1px 1px rgba(100, 100, 100, .1);
 }

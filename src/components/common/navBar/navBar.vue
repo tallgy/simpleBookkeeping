@@ -21,6 +21,8 @@ export default {
 <style>
 .nav-bar {
   display: flex;
+  position: sticky;
+  top: 0;
 
   text-align: center;
 
