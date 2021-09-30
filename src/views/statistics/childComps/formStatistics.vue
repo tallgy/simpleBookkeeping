@@ -45,29 +45,27 @@ export default {
     },
     initValue() {
       this.lineChartDom = this.$root.$echarts.init(document.getElementById('eChars'));
-
+      this.lineChartDom.showLoading();
       // this.dataYear && this.dataMonth
       // 数据请求和初始化数据
       getStatisticsInfo()
         .then(res => {
-          console.log(res);
+          this.initChartsData(res.day, res.month);
+          setTimeout(()=>{
+            this.lineChartDom.hideLoading();
+            this.showYearForm();
+          }, 1000);
         }, error => {
           console.log(error)
+          this.lineChartDom.hideLoading();
         });
-
-      this.initChartsData();
-      this.showYearForm();
-
     },
-    initChartsData() {
-      this.dataYear.input = [5, 20, 36, 10, 10, 20];
-      this.dataYear.output = [3, 12, 3, 0, 1, 1];
+    initChartsData(month, year) {
+      this.dataYear.input = year.input;
+      this.dataYear.output = year.output;
 
-      this.dataMonth.input = [2, 13,  43, 123, 23, 23];
-      this.dataMonth.output = [5, 23, 1, 3, 235, 12];
-    },
-    getCharts() {
-      this.showCharts(this.lineChartDom, this.dataYear);
+      this.dataMonth.input = month.input;
+      this.dataMonth.output = month.output;
     },
     showCharts(chartDom, data) {
       chartDom.setOption({
@@ -88,11 +86,11 @@ export default {
         yAxis: [
           {
             type: 'value',
-            name: '收入/100'
+            name: '收入/100元'
           },
           {
             type: 'value',
-            name: '支出/10'
+            name: '支出/10元'
           }
         ],
         series: [

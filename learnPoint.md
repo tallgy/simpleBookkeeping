@@ -36,7 +36,23 @@ echars  使用
     legend: { show: true }, 显示按钮可以选择是否显示,这里不知道是什么原因，
       报错了，第一次点击会报错，但是点击了按钮之后再点击就没有问题了
     y坐标设置和x坐标的设置
+    this.lineChartDom.showLoading(); 加载显示
+    this.lineChartDom.hideLoading();  加载隐藏
 
 sass
 
     要写成 scss
+
+
+network
+
+    network/request.js   / bookkeeping.js
+    拦截器，request.js     axios.create({});
+    return instance
+    使用 {url: '', method: 'post'};
+
+
+传输，
+
+    这里，因为vue的响应式布局，将数据进行了响应式的操作，所以直接传输的数据
+      是一个带有watcher，dep，和其他东西的，需要将其取出来再进行传递，

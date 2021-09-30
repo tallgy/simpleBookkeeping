@@ -74,14 +74,27 @@ export default {
     clickSubmit() {
       this.info.flag = this.info.flag==='true' ? true : false;
 
-      console.log(this.info)
+      const info = this.getInfo();
+
       // 传递给后台，并刷新页面
-      addBookkeeping(this.info)
+      addBookkeeping(info)
         .then(res => {
+          console.log('add bookkeeping')
           console.log(res)
         }, err => {
+          console.log('add bookkeeping')
           console.log(err)
         });
+    },
+    getInfo() {
+      return {
+        class: this.info.class,
+        title: this.info.title,
+        flag: this.info.flag,
+        money: this.info.money,
+        time: this.info.time,
+        describe: this.info.describe,
+      }
     }
   }
 }
