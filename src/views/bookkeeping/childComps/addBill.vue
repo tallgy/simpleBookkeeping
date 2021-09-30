@@ -30,6 +30,8 @@
 import navBar from 'components/common/navBar/navBar'
 import myButton from 'components/common/myButton/myButton'
 
+import { addBookkeeping } from 'network/bookkeeping'
+
 export default {
   name: "addBill",
   props: {
@@ -74,6 +76,12 @@ export default {
 
       console.log(this.info)
       // 传递给后台，并刷新页面
+      addBookkeeping(this.info)
+        .then(res => {
+          console.log(res)
+        }, err => {
+          console.log(err)
+        });
     }
   }
 }

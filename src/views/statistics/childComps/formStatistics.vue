@@ -12,6 +12,8 @@
 <script>
 import myBtn from 'components/common/myButton/myButton'
 
+import { getStatisticsInfo } from 'network/statistics'
+
 export default {
   name: "formStatistics",
   components: {
@@ -21,16 +23,18 @@ export default {
     return {
       title: '月份',
       dataYear: {
-        name: ['1月', '2月', '3月', '2月', '2月', '2月'],
+        name: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         input: [],
-        output: []
+        output: [],
+        xName: '月'
       },
       dataMonth: {
-        name: ['1', '2', '3', '4', '5', ' '],
+        name: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
         input: [],
-        output: []
+        output: [],
+        xName: '日'
       },
-      chartDom: Object,
+      lineChartDom: Object,
     };
   },
   created() {
@@ -40,12 +44,19 @@ export default {
       this.initValue();
     },
     initValue() {
-      this.chartDom = this.$root.$echarts.init(document.getElementById('eChars'));
+      this.lineChartDom = this.$root.$echarts.init(document.getElementById('eChars'));
 
       // this.dataYear && this.dataMonth
       // 数据请求和初始化数据
+      getStatisticsInfo()
+        .then(res => {
+          console.log(res);
+        }, error => {
+          console.log(error)
+        });
+
       this.initChartsData();
-      this.getCharts();
+      this.showYearForm();
 
     },
     initChartsData() {
@@ -56,7 +67,7 @@ export default {
       this.dataMonth.output = [5, 23, 1, 3, 235, 12];
     },
     getCharts() {
-      this.showCharts(this.chartDom, this.dataYear);
+      this.showCharts(this.lineChartDom, this.dataYear);
     },
     showCharts(chartDom, data) {
       chartDom.setOption({
@@ -67,9 +78,10 @@ export default {
           show: true
         },
         xAxis: {
-          // data: data.name,
+          data: data.name,
+          name: data.xName,
           axisLabel: {
-            formatter: '{value} 月',
+            formatter: '{value}',
               align: 'center'
           }
         },
@@ -108,10 +120,10 @@ export default {
       });
     },
     showYearForm() {
-      this.showCharts(this.chartDom, this.dataYear);
+      this.showCharts(this.lineChartDom, this.dataYear);
     },
     showMonthForm() {
-      this.showCharts(this.chartDom, this.dataMonth);
+      this.showCharts(this.lineChartDom, this.dataMonth);
     },
 
     },
