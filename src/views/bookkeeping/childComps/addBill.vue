@@ -88,7 +88,7 @@ export default {
     },
     getInfo() {
       return {
-        class: this.info.class,
+        type: this.info.class,
         title: this.info.title,
         flag: this.info.flag,
         money: this.info.money,
