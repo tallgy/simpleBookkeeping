@@ -24,14 +24,14 @@ export default {
       title: '月份',
       dataYear: {
         name: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-        input: [],
-        output: [],
+        input: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        output: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         xName: '月'
       },
       dataMonth: {
         name: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
-        input: [],
-        output: [],
+        input: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        output: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         xName: '日'
       },
       lineChartDom: Object,
@@ -50,22 +50,39 @@ export default {
       // 数据请求和初始化数据
       getStatisticsInfo()
         .then(res => {
-          this.initChartsData(res.day, res.month);
-          setTimeout(()=>{
-            this.lineChartDom.hideLoading();
-            this.showYearForm();
-          }, 1000);
+          this.initChartsData(res.data.data1, res.data.data2);
+          this.lineChartDom.hideLoading();
+          this.showYearForm();
         }, error => {
           console.log(error)
           this.lineChartDom.hideLoading();
         });
     },
-    initChartsData(month, year) {
-      this.dataYear.input = year.input;
-      this.dataYear.output = year.output;
+    initChartsData(data1, data2) {
+      let data1Flag = false,
+        data2Flag = false;
 
-      this.dataMonth.input = month.input;
-      this.dataMonth.output = month.output;
+      if (data1) {
+        data1Flag = data1.type ? true : false;
+        data2Flag = !data1Flag;
+      } else if (data2) {
+        data2Flag = data2.type ? true : false;
+        data1Flag = !data2Flag;
+      } else {
+        return ;
+      }
+
+      const money1 = JSON.parse(data1.money);
+      const money2 = JSON.parse(data2.money);
+
+      let input = data1Flag ? money1 : money2,
+        output = data1Flag ? money2 : money1;
+
+      this.dataYear.input = input.month;
+      this.dataYear.output = output.month;
+
+      this.dataMonth.input = input.day;
+      this.dataMonth.output = output.day;
     },
     showCharts(chartDom, data) {
       chartDom.setOption({
